@@ -41,7 +41,8 @@ public abstract class MapReduce {
         try {
             LOGGER = Logger.getLogger(MyMapReduce.class.getName());
             //split input into as many as nSplits files.
-
+            //If split.sh doesn't work for you because you are developing on a windows PC, you can comment the lines underneath
+            //to skip spliting process, copy pre-split data to res/ and then proceed.
             Process p = Runtime.getRuntime().exec(new String[] { "/bin/bash" , "-c", "./res/split.sh "+inputFile +" " +nSplits});
             p.waitFor();
             int exitVal = p.exitValue();
@@ -62,7 +63,8 @@ public abstract class MapReduce {
         for (int i=0; i<nMappers; i++)
             pw[i].close();
         try {
-
+            //Again, if you are developing on a windows PC, you need to find a line comparasion tool to compare
+            //the expected output with your output manually.
             Process p = Runtime.getRuntime().exec(new String[] { "/bin/sh" , "-c", "./res/test.sh "+inputFile});
             p.waitFor();
             int exitVal = p.exitValue();
