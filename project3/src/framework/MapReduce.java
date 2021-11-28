@@ -33,11 +33,9 @@ public abstract class MapReduce {
                                         int num_reducers) ;
 
     public void MRPostProcess(String key, int value, int partNum) {
-        //stopWatch[partNum].pause();
-        //why does run time estimate stops here?
-        //please the following is only IO for post-process
+        //The following is only IO for post-process
         pw[partNum].printf("%s:%d\n", (String)key, value);
-        //stopWatch[partNum].resume();
+       
     }
     protected void setup (int nSplits, String inputFile) {
         try {
